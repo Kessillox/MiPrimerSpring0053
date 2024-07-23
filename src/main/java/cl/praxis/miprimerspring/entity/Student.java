@@ -25,5 +25,6 @@ public class Student {
     private LocalDate birthDate;
     @Column(nullable = false, unique = true)
     private String email;
+    //TODO Crear clase super persona
 
 }
