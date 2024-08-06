@@ -29,8 +29,7 @@ class MiPrimerSpring0053ApplicationTests {
         student.setBirthDate(LocalDate.of(1999, 5, 2));
         student.setEmail("bryancabreram3@gmail.com");
 
-        studentService.saveStudent(student);
+        studentService.save(student);
         verify(repository, times(1)).save(student);
     }
-
 }

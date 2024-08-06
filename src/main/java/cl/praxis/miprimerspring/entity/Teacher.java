@@ -3,26 +3,28 @@ package cl.praxis.miprimerspring.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "profesores")
-public class Teacher {
+public class Teacher extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_profesor")
     private int id;
-    @Column(name = "nombre", nullable = false, length = 50)
-    private String name;
-    @Column(name = "apellido", nullable = false, length = 50)
-    private String surname;
-    @Column(name = "correo", nullable = false, length = 50)
-    private String email;
-    @Column(name = "asignatura", nullable = false, length = 100)
-    public String subject;
-    //TODO Crear clase super persona
+
+    @ManyToMany(mappedBy = "teachers")
+    private List<Course> courses = new ArrayList<>();
+
 }
 

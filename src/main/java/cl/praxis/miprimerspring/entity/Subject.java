@@ -12,27 +12,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "cursos")
-public class Course {
+@Table(name = "asignaturas")
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_curso")
+    @Column(name = "id_asignatura")
     private int id;
     @Column(name = "titulo", nullable = false, length = 50)
     private String title;
     @Column(name = "descripcion", nullable = false, length = 100)
     private String description;
-    @OneToMany(mappedBy = "course")
-    private List<Student> students;
-    @ManyToMany
-    @JoinTable(
-            name = "profesor_curso",
-            joinColumns = @JoinColumn(name = "id_profesor"),
-            inverseJoinColumns = @JoinColumn(name = "id_curso" )
-    )
-    private List<Teacher> teachers;
-    @OneToMany(mappedBy = "course")
-    private List<Subject> subjects;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Course course;
+    @OneToMany(mappedBy = "subject")
+    private List<Grade> notas = new ArrayList<>();
 }
